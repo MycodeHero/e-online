@@ -10,11 +10,9 @@ export default {
 
 <style>
   .school-logo {
-      display:inline-block;
-      width: 20rem;
-      height: 20rem;
-      background:url("../assets/logo.jpg") no-repeat;
-      background-size:100% 100%;
-      margin-top:40px;
+      width:100%;
+      height:50%;
+      background:url("../assets/logo.jpg") no-repeat 50% 80%;
+      background-size:20rem 20rem;
   }
 </style>
