@@ -1,23 +1,23 @@
 <template>
   <div id="app">
-    <MaskLayer/>
-    <div class="login">
+    <!-- <div class="login">
+      <Logo/>
       <Login/>
-      <LoginRegist/>
-    </div>
+    </div>   -->
+    <FootNav></FootNav>
   </div>
 </template>
 
 <script>
 import Login from '@/pages/Login.vue'
-import MaskLayer from '@/components/MaskLayer.vue'
-import LoginRegist from '@/components/LoginRegist.vue'
+import Logo from '@/pages/Logo.vue'
+import FootNav from '@/pages/FootNav.vue'
 export default {
   name: 'App',
   components: {
+    Logo,
     Login,
-    MaskLayer,
-    LoginRegist
+    FootNav
   }
 }
 </script>
@@ -31,6 +31,7 @@ html, body {
   width: 100%;
   height: 100%;
   font-size: 14px;
+  overflow:hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

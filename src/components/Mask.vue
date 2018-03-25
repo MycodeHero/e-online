@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'MaskLayer'
+  name: 'Mask'
 }
 </script>
 
