@@ -1,8 +1,12 @@
 <template>
   <div class="footer-nav">
-    <div v-for="(nav, index) in navs" :key="index">
-      <img :src="nav.imgSrc" width=25>
-      <p>{{nav.title}}</p>
+    <div class='footer-router'>
+      <router-link v-for="(nav, index) in navs" :key="index" :to="nav.toUrl">
+        <div class="nav-wrap">
+          <img :src="nav.imgSrc" width=25/>
+          <p>{{nav.title}}</p>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -14,18 +18,22 @@ export default {
     return {
       navs: [
         {
+          toUrl: 'natural',
           imgSrc: '../../static/image/resourse.png',
           title: '资源'
         },
         {
+          toUrl: 'refer',
           imgSrc: '../../static/image/refer.png',
           title: '推荐'
         },
         {
+          toUrl: 'talk',
           imgSrc: '../../static/image/talk.png',
           title: '论坛'
         },
         {
+          toUrl: 'admin',
           imgSrc: '../../static/image/admin.png',
           title: '个人'
         }
@@ -42,19 +50,25 @@ export default {
     left:0px;
     width: 100%;
     height:50px;
-    box-shadow: 0 -1px 10px rgba(0,0,0, 0.1);
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.1);
   }
-
-  .footer-nav>div {
-    width:25%;
+  .footer-router {
+    display:flex;
+    width:100%;
     height:100%;
-    float:left;
+  }
+  .footer-router > a {
+    display:flex;
+    flex-grow: 1;
+    height: 100%;
+    align-items:center;
+    justify-content: center;
   }
   .footer-nav img {
-    margin-top:2px;
+    display: block;
   }
   .footer-nav p {
-    font-size:10px;
+    font-size:8px;
     color:#666;
   }
 </style>

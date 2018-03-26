@@ -4,6 +4,7 @@
       <Logo/>
       <Login/>
     </div>   -->
+    <router-view></router-view>
     <FootNav></FootNav>
   </div>
 </template>
@@ -33,6 +34,16 @@ html, body {
   font-size: 14px;
   overflow:hidden;
 }
+a {
+  text-decoration: none;
+}
+
+input{
+    background:none;
+    outline:none;
+    border:0px;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
