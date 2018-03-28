@@ -20,6 +20,8 @@ export default {
     align-items:center;
     width: 100%;
     height:40px;
+    box-sizing: border-box;
+    padding: 0 10px;
   }
 
   .search input {
@@ -39,12 +41,12 @@ export default {
     transform:translateY(-50%)
   }
   .search-icon {
-    left: 8px;
+    left: 18px;
     background: url('../../static/image/search.png');
     background-size:100% 100%;
   }
   .delete-icon {
-    right: 8px;
+    right: 18px;
     background: url('../../static/image/delete.png');
     background-size:100% 100%;
   }
