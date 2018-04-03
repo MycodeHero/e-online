@@ -5,6 +5,7 @@
     </div>
     <ScrollBar :initialIndex="2"/>
     <h1>natural</h1>
+    <slot>没有分发内容才显示</slot>
   </div>
 </template>
 
