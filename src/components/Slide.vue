@@ -1,11 +1,12 @@
 <template>
     <div class="scroll-bar">
       <div class="content" ref="wrapper">
-        <li><img src='../../static/image/python.jpg'></li>
-        <li><img src='../../static/image/ruff.jpg'></li>
-        <li><img src='../../static/image/ios.jpg'></li>
-        <li><img src='../../static/image/go.jpg'></li>
-        <li><img src='../../static/image/maya.jpg'></li>
+        <li v-for="(item, index) in slideData" :key="index">
+          <img :src="item.imgUrl"/>
+        </li>
+      </div>
+      <div class="points">
+        <i class="circle" :class="{active: currentPage == index }" v-for="(item, index) in slideData" :key="index"></i>
       </div>
     </div>
 </template>
@@ -21,7 +22,7 @@ export default {
     height: String,
     'initial-index': {
       type: Number,
-      default: 0
+      default: 1
     },
     autoplay: {
       type: Boolean,
@@ -30,6 +31,23 @@ export default {
     interval: {
       type: Number,
       default: 3000
+    },
+    slideData: {
+      type: Array,
+      default: () => {
+        return [
+          {imgUrl: '../../static/image/python.jpg'},
+          {imgUrl: '../../static/image/ruff.jpg'},
+          {imgUrl: '../../static/image/ios.jpg'},
+          {imgUrl: '../../static/image/go.jpg'},
+          {imgUrl: '../../static/image/maya.jpg'}
+        ]
+      }
+    }
+  },
+  data () {
+    return {
+      currentPage: this.initialIndex - 1
     }
   },
   mounted () {
@@ -41,8 +59,16 @@ export default {
       let pages = (this.loop && 2) + 5
       this.$refs.wrapper.style.width = pages * 100 + '%'
     },
+    pointMove (direction) {
+      let index = this.slide.currentPage.pageX
+      if (this.currentPage < index) {
+        this.currentPage = index === 5 ? 0 : index 
+      } else {
+        this.currentPage = index === 0 ? 4 : index - 1
+      }
+    },
     next () {
-      this.slide.next()
+      this.pointMove()
     },
     prev () {
       this.slide.prev()
@@ -50,7 +76,7 @@ export default {
     play () {
       clearInterval(this.timer)
       this.timer = setInterval(() => {
-        this.next()
+        this.prev()
       }, this.interval)
     },
     _initSlide () {
@@ -69,9 +95,14 @@ export default {
       this.autoplay && this.play()
       this.autoplay && this.slide.on('scrollStart', () => {
         clearInterval(this.timer)
+        
       })
       this.autoplay && this.slide.on('scrollEnd', () => {
         this.play()
+      })
+
+      this.slide.on('beforeScrollStart', ()=>{
+        this.pointMove()
       })
     }
   }
@@ -80,14 +111,17 @@ export default {
 
 <style>
   .scroll-bar {
+    position: relative;
     width: 100%;
-    height: 125px;
+    height: 10rem;
   }
   .content {
     display: flex;
     height: 100%;
   }
   .content li{
+    box-sizing: border-box;
+    padding: 10px 20px;
     flex-grow: 1;
     height: 100%;
   }
@@ -98,5 +132,26 @@ export default {
   .content li>img {
     width: 100%;
     height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0px 8px black
+  }
+  .points {
+    position:absolute;
+    bottom: -5px;
+    left: 50%;
+    transform:translateX(-50%);
+  }
+
+  .points .circle {
+    display:inline-block;
+    width: 4px;
+    height: 4px;
+    margin:0 4px;
+    border-radius: 2px;
+    background:rgba(101, 200, 122, 0.8);
+  }
+
+  .points .active {
+    width: 12px;
   }
 </style>

@@ -3,7 +3,9 @@
     <div class="natural-top">
       <Search/>
     </div>
-    <ScrollBar :initialIndex="2"/>
+    <keep-alive>
+      <Slide/>
+    </keep-alive>
     <h1>natural</h1>
     <slot>没有分发内容才显示</slot>
   </div>
@@ -11,11 +13,11 @@
 
 <script>
 import Search from '@/components/Search.vue'
-import ScrollBar from '@/components/ScrollBar.vue'
+import Slide from '@/components/Slide.vue'
 export default {
   components: {
     Search,
-    ScrollBar
+    Slide
   }
 }
 </script>

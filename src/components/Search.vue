@@ -33,7 +33,7 @@ export default {
     padding: 0 31px;
   }
 
-  i {
+  .search-icon, .delete-icon{
     position:absolute;
     width:15px;
     height:15px;
