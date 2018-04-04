@@ -19,6 +19,10 @@ export default {
       type: Boolean,
       default: true
     },
+    probeType: {
+      type: Number,
+      default: 3
+    },
     height: String,
     'initial-index': {
       type: Number,
@@ -62,13 +66,13 @@ export default {
     pointMove (direction) {
       let index = this.slide.currentPage.pageX
       if (this.currentPage < index) {
-        this.currentPage = index === 5 ? 0 : index 
+        this.currentPage = index === 6 ? 0 : index - 1
       } else {
         this.currentPage = index === 0 ? 4 : index - 1
       }
     },
     next () {
-      this.pointMove()
+      this.slide.next()
     },
     prev () {
       this.slide.prev()
@@ -76,7 +80,7 @@ export default {
     play () {
       clearInterval(this.timer)
       this.timer = setInterval(() => {
-        this.prev()
+        this.next()
       }, this.interval)
     },
     _initSlide () {
@@ -89,19 +93,17 @@ export default {
           loop: this.loop
         },
         bounce: false,
-        stopPropagation: true
+        stopPropagation: true,
+        probeType: this.probeType
       })
       // 轮播图是否开启自动播放功能
       this.autoplay && this.play()
-      this.autoplay && this.slide.on('scrollStart', () => {
-        clearInterval(this.timer)
-        
-      })
-      this.autoplay && this.slide.on('scrollEnd', () => {
-        this.play()
+      this.slide.on('scrollStart', () => {
+        this.autoplay && clearInterval(this.timer)
       })
 
-      this.slide.on('beforeScrollStart', ()=>{
+      this.slide.on('scrollEnd', () => {
+        this.autoplay && this.play()
         this.pointMove()
       })
     }
@@ -114,6 +116,7 @@ export default {
     position: relative;
     width: 100%;
     height: 10rem;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.1)
   }
   .content {
     display: flex;
@@ -137,7 +140,7 @@ export default {
   }
   .points {
     position:absolute;
-    bottom: -5px;
+    bottom: -3px;
     left: 50%;
     transform:translateX(-50%);
   }
