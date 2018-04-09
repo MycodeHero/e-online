@@ -6,18 +6,27 @@
     <keep-alive>
       <Slide/>
     </keep-alive>
-    <h1>natural</h1>
-    <slot>没有分发内容才显示</slot>
+    <div class="natural-list" ref="n_list">
+      <Card/>
+      <Card/>
+      <Card/>
+      <Card/>
+    </div>
   </div>
 </template>
 
 <script>
 import Search from '@/components/Search.vue'
 import Slide from '@/components/Slide.vue'
+import Card from '@/components/Card.vue'
 export default {
   components: {
     Search,
-    Slide
+    Slide,
+    Card
+  },
+  mounted () {
+    this.$refs.n_list.style.height = (window.innerHeight - 230) + 'px'
   }
 }
 </script>
@@ -33,5 +42,13 @@ export default {
     width: 100%;
     display:inline-block;
     box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+  }
+
+  .natural-list {
+    overflow: scroll;
+  }
+
+  .card:last-child::after {
+    display: none;
   }
 </style>
