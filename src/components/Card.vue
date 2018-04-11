@@ -1,27 +1,44 @@
 <template>
   <div class="card">
     <div class="card-title">
-      <span>高数</span>
+      <span>{{kind}}</span>
       <a href="#">查看全部</a>
     </div>
-    <div class="card-item" v-for="i in [1,2,3]" :key="i">
-      <img src="../../static/image/toutiao.jpeg"/>
-      <div class="card-wrap">
-        <div class="card-msg">
-          <p class="title">今日头条</p>
-          <span class="msg">你关心的，才是头条</span>
-        </div>
-        <div class="card-select">
-          <span>查看</span>
+      <div class="card-item" v-for="(item, index) in cData" :key="index">
+        <img :src="item.imgUrl"/>
+        <div class="card-wrap">
+          <div class="card-msg">
+            <p class="title">{{item.title}}</p>
+            <span class="msg">{{item.msg}}</span>
+          </div>
+          <Button content="学习"/>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
+import Button from '../components/Button'
 export default {
-
+  props: {
+    kind: {
+      type: String,
+      default: '高数'
+    },
+    cData: {
+      type: Array,
+      default () {
+        return [
+          {imgUrl: '../../static/image/toutiao.jpeg', title: '今日头条', msg: '你关心的，才是头条'},
+          {imgUrl: '../../static/image/toutiao.jpeg', title: '今日头条', msg: '你关心的，才是头条'},
+          {imgUrl: '../../static/image/toutiao.jpeg', title: '今日头条', msg: '你关心的，才是头条'}
+        ]
+      }
+    }
+  },
+  components: {
+    Button
+  }
 }
 </script>
 
@@ -48,12 +65,11 @@ export default {
     padding: 0 5px;
   }
   .card-title span {
-    margin-left: 10px;
+    margin-left: 8px;
     font-size: 17px;
     font-weight: 700;
   }
   .card-title a {
-    margin-right: 10px;
     color:rgb(64, 131, 235);
     font-size:12px;
   }
@@ -100,22 +116,5 @@ export default {
   .card-msg .msg {
     width: 100%;
     font-size: 12px;
-  }
-
-  .card-select {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-  }
-
-  .card-select span {
-    display: inline-block;
-    width:40px;
-    height:22px;
-    border-radius:11px;
-    background: rgb(240, 239, 246);
-    padding: 0 10px;
-    font-size:12px;
-    line-height: 22px;
   }
 </style>

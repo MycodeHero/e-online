@@ -1,0 +1,6 @@
+CREATE TABLE student(
+  id INT NOT NULL AUTO_INCREMENT KEY,
+  name VARCHAR(20) NOT NULL,
+  sex CHAR(1) NULL,
+  in_time DATETIME NULL
+);

@@ -16,7 +16,7 @@ export default {
   .search {
     position:relative;
     display: flex;
-    justify-content: center;
+    justify-content:center;
     align-items:center;
     width: 100%;
     height:40px;

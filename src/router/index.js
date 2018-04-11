@@ -1,18 +1,3 @@
-// import Vue from 'vue'
-// import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-// Vue.use(Router)
-
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'Login',
-//       component: Login
-//     }
-//   ]
-// })
-
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -30,7 +15,16 @@ const router = new Router({
       path: '/natural',
       component (resolve) {
         require(['@/pages/nav-pages/natural.vue'], resolve)
-      }
+      },
+      children: [
+        {
+          path: '/view',
+          component (resolve) {
+            console.log('11111')
+            require(['@/pages/nav-pages/natural-view/view.vue'], resolve)
+          }
+        }
+      ]
     },
     {
       path: '/refer',
