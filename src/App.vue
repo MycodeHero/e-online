@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <!-- <div class="login">
-      <Logo/>
-      <Login/>
+    <Login v-if="!status"/>
+    <!-- <div class="enter-pages" v-else>
+      <router-view></router-view>
+      <FootNav></FootNav>
     </div> -->
-    <router-view></router-view>
-    <FootNav></FootNav>
   </div>
 </template>
 
 <script>
 import Login from '@/pages/Login.vue'
-import Logo from '@/pages/Logo.vue'
 import FootNav from '@/pages/FootNav.vue'
 export default {
   name: 'App',
+  data () {
+    return {
+      status: false
+    }
+  },
   components: {
-    Logo,
     Login,
     FootNav
   }
@@ -56,9 +58,11 @@ li {
   text-align: center;
   color: #2c3e50;
   height:100%;
+  background: url('../static/image/bg.jpg') no-repeat 50% 50%;
+  background-size: 100% 100%;
 }
 
-.login {
+.enter-pages, .login{
   width: 100%;
   height: 100%;
 }

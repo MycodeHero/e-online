@@ -20,7 +20,6 @@ const router = new Router({
         {
           path: '/view',
           component (resolve) {
-            console.log('11111')
             require(['@/pages/nav-pages/natural-view/view.vue'], resolve)
           }
         }

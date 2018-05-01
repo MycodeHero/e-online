@@ -2,7 +2,7 @@
   <div class="footer-nav">
     <div class='footer-router'>
       <router-link v-for="(nav, index) in navs" :key="index" :to="nav.toUrl">
-        <div class="nav-wrap">
+        <div class="nav-wrap" @click="handleclick(nav.fetchUrl)">
           <img :src="nav.imgSrc" width=25/>
           <p>{{nav.title}}</p>
         </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'FNav',
   data: function () {
@@ -35,9 +36,21 @@ export default {
         {
           toUrl: 'admin',
           imgSrc: '../../static/image/admin.png',
-          title: '个人'
+          title: '个人',
+          fetchUrl: 'http://127.0.0.1:8000/users/'
         }
       ]
+    }
+  },
+  methods: {
+    handleclick (fetchUrl) {
+      axios.get(fetchUrl)
+        .then((data) => {
+          this.$store.commit({
+            type: 'fetchAdmin',
+            adminData: data.data
+          })
+        })
     }
   }
 }
